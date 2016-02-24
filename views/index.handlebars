@@ -1,0 +1,7 @@
+<h1>Welcome, {{ user.first_name }}!</h1>
+<p>Select a project below:</p>
+{{#each boards}}
+  <div class="client">
+    <a class="button" href="/time/{{ this.public.apikey }}">{{ this.public.name }}</a>
+  </div>
+{{/each}}

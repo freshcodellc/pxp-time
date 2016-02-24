@@ -1,0 +1,44 @@
+<h1>Time Entries</h1>
+<div class="entries">
+  <div class="row">
+    <form class="" action="/entries/" method="post">
+      <div class="large-3 columns">
+        <label for="hours">Start Date
+          <input id="start-date" type="input" name="start">
+        </label>
+      </div>
+      <div class="large-3 columns">
+        <label for="hours">End Date
+          <input id="end-date" type="input" name="end">
+        </label>
+      </div>
+      <input class="button success small" type="submit" name="submit" value="Submit">
+    </form>
+  </div>
+  {{#if entries}}
+  <table>
+    <thead>
+      <tr>
+        <th width="200">Client</th>
+        <th>Board</th>
+        <th width="150">Card</th>
+        <th width="150">Time</th>
+        <th width="150">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each entries}}
+        <tr>
+          <td>{{ this.client.public.name }}</td>
+          <td>{{ this.board.public.name }}</td>
+          <td>{{ this.card.public.name }}</td>
+          <td>{{formatTime this.entry.hours }}:{{formatTime this.entry.minutes }}</td>
+          <td>{{ this.entry.status }}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+  <p>No time entries found for this date range.</p>
+  {{/if}}
+</div>
