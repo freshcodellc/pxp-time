@@ -42,8 +42,8 @@ resources.getEntries = function(params) {
     params.start = moment().subtract(30, 'days').format('YYYY-MM-DD')
     params.end = moment().add(1, 'days').format('YYYY-MM-DD')
   } else {
-    params.start = moment(params.start).format('YYYY-MM-DD')
-    params.end = moment(params.end).format('YYYY-MM-DD')
+    params.start = moment(params.start, 'MM/DD/YYYY').format('YYYY-MM-DD')
+    params.end = moment(params.end, 'MM/DD/YYYY').format('YYYY-MM-DD')
   }
 
   options.params = params
