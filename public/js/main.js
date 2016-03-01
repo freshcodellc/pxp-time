@@ -14,6 +14,7 @@
 
     // Timer Logics
     var timer = false;
+    var blurTime = false;
 
     function evaluateTime() {
       var currentTime = $('#timer').val();
@@ -70,6 +71,36 @@
         startTimer();
       }
     })
+
+    $(window).focus(function() {
+        var isTiming = $('#toggle-timer').hasClass('success');
+        if (!timer && !isTiming && blurTime) {
+          var now = moment().unix().valueOf();
+          timeDeltaMs = (now-blurTime)*1000;
+          timeDelta = moment.duration(timeDeltaMs);
+
+          var currentTime = $('#timer').val();
+          var timeArray = currentTime.split(':');
+
+          var hours = (parseInt(timeArray[0]) + timeDelta.hours())*60*60;
+          var minutes = (parseInt(timeArray[1]) + timeDelta.minutes())*60;
+          var seconds = parseInt(timeArray[2]) + timeDelta.seconds();
+
+          var totalSeconds = (hours + minutes + seconds);
+          var newTotal = (totalSeconds+1)*1000
+          var newTime = moment.utc(newTotal).format("HH:mm:ss");
+
+          $('#timer').val(newTime)
+          timer = setInterval(evaluateTime, 1000);
+        }
+    });
+
+    $(window).blur(function() {
+        if (timer) {
+          timer = clearInterval(timer);
+          blurTime = moment().unix().valueOf();
+        }
+    });
 
   });
 })(jQuery);
