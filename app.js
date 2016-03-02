@@ -57,17 +57,24 @@ app.get('/', function(req, res) {
 })
 
 app.get('/time/:apikey', function(req, res) {
-  api.getBoard(req.params.apikey)
-    .then(function(response) {
-      var board = response.data
+  var params = {}
+
+  params.start = moment().format('MM/DD/YYYY');
+  params.end = moment().add(1, 'days').format('MM/DD/YYYY');
+
+  axios.all([api.getBoard(req.params.apikey), api.getEntries(params)])
+    .then(axios.spread(function (r1, r2) {
+      var board = r1.data
+      var entries = r2.data.entries
       res.render('time', {
         board: board,
+        entries: entries,
         message: req.flash('info'),
         error: req.flash('error')
       })
-    })
-    .catch(function(request) {
-      console.log(request)
+    }))
+    .catch(function(response) {
+      console.log(response)
       req.flash('error', 'An Error Happened!')
       res.render('time')
     })

@@ -22,4 +22,31 @@
       <input type="submit" name="submit" value="SUBMIT" class="button medium">
     </p>
   </form>
+  {{#if entries}}
+  <h2>Today's Entries</h2>
+  <table>
+    <thead>
+      <tr>
+        <th width="200">Client</th>
+        <th>Board</th>
+        <th width="150">Card</th>
+        <th width="150">Time</th>
+        <th width="150">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each entries}}
+        <tr>
+          <td>{{ this.client.public.name }}</td>
+          <td>{{ this.board.public.name }}</td>
+          <td>{{ this.card.public.name }}</td>
+          <td>{{formatTime this.entry.hours }}:{{formatTime this.entry.minutes }}</td>
+          <td>{{ this.entry.status }}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+  <p>No time entries found for this date range.</p>
+  {{/if}}
 </div>
