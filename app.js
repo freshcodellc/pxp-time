@@ -70,9 +70,20 @@ app.get('/time/:apikey', function(req, res) {
     .then(axios.spread(function (r1, r2) {
       var board = r1.data
       var entries = r2.data.entries
+      var hours = 0;
+      var minutes = 0;
+
+      entries.forEach(function(entry) {
+        hours = hours + entry.entry.hours;
+        minutes = minutes + entry.entry.minutes;
+      })
+
+      var total = hours + ':' + minutes;
+
       res.render('time', {
         board: board,
         entries: entries,
+        total: total,
         message: req.flash('info'),
         error: req.flash('error')
       })
