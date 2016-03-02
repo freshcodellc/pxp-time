@@ -18,6 +18,10 @@ var hbs = exphbs.create({
     formatTime: function(time) {
       var timeString = '0' + time.toString();
       return timeString.slice(-2)
+    },
+    formatDate: function(context, block) {
+      var f = block.hash.format || "MMMM Do, YYYY";
+      return moment(context).format(f);
     }
   }
 });
