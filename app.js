@@ -62,7 +62,7 @@ app.get('/', function(req, res) {
 app.get('/time/:apikey', function(req, res) {
   var params = {}
 
-  params.start = moment().add(2, 'days').format('MM/DD/YYYY');
+  params.start = moment().format('MM/DD/YYYY');
   params.end = moment().add(2, 'days').format('MM/DD/YYYY');
 
   axios.all([api.getBoard(req.params.apikey), api.getEntries(params)])
