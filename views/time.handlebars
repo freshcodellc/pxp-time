@@ -27,6 +27,7 @@
   <table>
     <thead>
       <tr>
+        <th>Date</th>
         <th width="200">Client</th>
         <th>Board</th>
         <th width="150">Card</th>
@@ -37,6 +38,7 @@
     <tbody>
       {{#each entries}}
         <tr>
+          <td>{{formatDate this.entry.created_at }}</td>
           <td>{{ this.client.public.name }}</td>
           <td>{{ this.board.public.name }}</td>
           <td>{{ this.card.public.name }}</td>

@@ -44,7 +44,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/static', express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
-  // console.log(req.flash('info'))
   axios.all([api.getBoards(), api.getUser()])
     .then(axios.spread(function (r1, r2) {
       res.render('index', {
@@ -63,8 +62,8 @@ app.get('/', function(req, res) {
 app.get('/time/:apikey', function(req, res) {
   var params = {}
 
-  params.start = moment().format('MM/DD/YYYY');
-  params.end = moment().add(1, 'days').format('MM/DD/YYYY');
+  params.start = moment().add(2, 'days').format('MM/DD/YYYY');
+  params.end = moment().add(2, 'days').format('MM/DD/YYYY');
 
   axios.all([api.getBoard(req.params.apikey), api.getEntries(params)])
     .then(axios.spread(function (r1, r2) {
@@ -89,9 +88,27 @@ app.get('/time/:apikey', function(req, res) {
       })
     }))
     .catch(function(response) {
-      console.log(response)
-      req.flash('error', 'An Error Happened!')
-      res.render('time')
+      // TODO: Remove once API isn't broken
+      if (response.data.error === "Couldn't find any entries. Be sure to properly authenticate and supply a valid start date and end date to your request.") {
+        api.getBoard(req.params.apikey)
+          .then(function(response) {
+            var board = response.data
+            res.render('time', {
+              board: board,
+              message: req.flash('info'),
+              error: req.flash('error')
+            })
+          })
+          .catch(function(resposne) {
+            console.log(response);
+            req.flash('error', 'An Error Happened!')
+            res.render('time')
+          })
+      } else {
+        console.log(response);
+        req.flash('error', 'An Error Happened!')
+        res.render('time')
+      }
     })
 })
 
@@ -99,9 +116,11 @@ app.post('/time/', function(req, res) {
   var post_data = req.body
   post_data.hours = parseInt(post_data.timer.split(':')[0])
   post_data.minutes = parseInt(post_data.timer.split(':')[1])
+  console.log(post_data);
 
   api.postEntry(post_data)
     .then(function(response) {
+      console.log(response);
       req.flash('info', 'Time Entry Saved Successfully!')
       res.redirect(req.get('referer'));
     })
@@ -120,7 +139,14 @@ app.get('/entries', function(req, res) {
       })
     })
     .catch(function(response) {
-      console.log(response)
+      // TODO: Remove once API isn't broken
+      if (response.data.error === "Couldn't find any entries. Be sure to properly authenticate and supply a valid start date and end date to your request.") {
+        res.render('entries', {
+          entries: []
+        })
+      } else {
+        console.log(response)
+      }
     })
 })
 

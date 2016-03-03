@@ -40,7 +40,7 @@ resources.getEntries = function(params) {
   if (typeof params == 'undefined' && params !== '') {
     var params = {}
     params.start = moment().subtract(30, 'days').format('YYYY-MM-DD')
-    params.end = moment().add(1, 'days').format('YYYY-MM-DD')
+    params.end = moment().add(2, 'days').format('YYYY-MM-DD')
   } else {
     params.start = moment(params.start, 'MM/DD/YYYY').format('YYYY-MM-DD')
     params.end = moment(params.end, 'MM/DD/YYYY').format('YYYY-MM-DD')
