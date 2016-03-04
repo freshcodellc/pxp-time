@@ -22,7 +22,11 @@ router.get('/:apikey', function(req, res) {
         minutes = minutes + entry.entry.minutes;
       })
 
-      var total = hours + ':' + minutes;
+      var hoursMs = hours*60*60;
+      var minutesMs = minutes*60;
+
+      var newTotal = (hoursMs + minutesMs)*1000;
+      var total = moment.utc(newTotal).format("HH:mm");
 
       res.render('time', {
         board: board,
