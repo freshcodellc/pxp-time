@@ -1,0 +1,37 @@
+<h1>Weekly Report - {{ grandTotalTimeWeek }}</h1>
+<div class="entries">
+  {{#if projects}}
+  <table>
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th width="250">Sunday</th>
+        <th width="250">Monday</th>
+        <th width="250">Tuesday</th>
+        <th width="250">Wednesday</th>
+        <th width="250">Thursday</th>
+        <th width="250">Friday</th>
+        <th width="250">Saturday</th>
+        <th width="250">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each projects}}
+        <tr>
+          <td>{{ this.name }}</td>
+          <td>{{ this.Sunday.total}}</td>
+          <td>{{ this.Monday.total}}</td>
+          <td>{{ this.Tuesday.total}}</td>
+          <td>{{ this.Wednesday.total}}</td>
+          <td>{{ this.Thursday.total}}</td>
+          <td>{{ this.Friday.total}}</td>
+          <td>{{ this.Saturday.total}}</td>
+          <td>{{ this.weekTotal}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+  <p>No time tracked for this week.</p>
+  {{/if}}
+</div>

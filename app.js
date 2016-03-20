@@ -9,7 +9,7 @@ var flash = require('connect-flash')
 var indexRoutes = require('./routes/index')
 var timeRoutes = require('./routes/time')
 var entriesRoutes = require('./routes/entries')
-
+var weeklyRoutes = require('./routes/weekly')
 var cfg = require('./config')
 
 var app = express()
@@ -49,6 +49,7 @@ app.use('/static', express.static(__dirname + '/public'));
 app.use('/', indexRoutes)
 app.use('/time', timeRoutes)
 app.use('/entries', entriesRoutes)
+app.use('/weekly', weeklyRoutes)
 
 app.listen(cfg.port, function() {
   console.log('Server running at http://localhost:' + cfg.port);
