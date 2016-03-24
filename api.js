@@ -51,6 +51,17 @@ resources.getEntries = function(params) {
   return axios.get(entriesUrl, options)
 }
 
+var weeklyUrl = cfg.api_root + '/entries'
+resources.getWeekly = function() {
+  var options = {}
+  var params = {}
+  params.start = moment().startOf('week').format('YYYY-MM-DD')
+  params.end = moment().endOf('week').format('YYYY-MM-DD')
+  options.params = params
+
+  return axios.get(weeklyUrl, options)
+}
+
 var url = cfg.api_root + '/entries'
 resources.postEntry = function(post_data) {
   return axios.post(url, post_data)
