@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
           entries: []
         })
       } else {
-        console.log(response)
+        console.log(response);
       }
     })
 })
@@ -28,6 +28,7 @@ router.post('/', function(req, res) {
 
   params.start = post_data.start;
   params.end = post_data.end;
+  params.filter = post_data.filter;
 
   api.getEntries(params)
     .then(function(response) {
