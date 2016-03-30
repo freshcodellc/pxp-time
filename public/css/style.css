@@ -1,4 +1,8 @@
 /* My Stuff */
+input {
+  height: 44px;
+}
+
 .content {
   width: 70%;
   padding: 20px 40px;
@@ -21,6 +25,12 @@
 
 #toggle-timer {
   position: absolute; }
+
+#filter {
+  width: auto;
+  height: 44px;
+  padding: 0 15px;
+}
 
 /* Foundation Sidebar Junk */
 .right-off-canvas-toggle .menu {
