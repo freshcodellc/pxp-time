@@ -78,4 +78,37 @@ router.post('/', function(req, res) {
     })
 })
 
+router.post('/search', function(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'POST');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  var post_data = req.body
+
+  var params = {}
+  console.log('po', post_data)
+  params.start = moment().format('MM/DD/YYYY');
+  params.end = moment().add(2, 'days').format('MM/DD/YYYY');
+  axios.all([api.getBoard(post_data.apikey), api.getEntries(params)])
+    .then(axios.spread(function (r1, r2) {
+      var board = r1.data
+      var entries = r2.data.entries
+      var search = post_data.search.toLowerCase();
+      var searchBoard = {
+        cards: []
+      };
+
+      board.cards.forEach(function(card, index) {
+        var name = card.public.name.toLowerCase();
+        if(search === '' || name.indexOf(search) > -1) {
+          searchBoard.cards.push(board.cards[index])
+        }
+      })
+      res.render('./partials/options', {
+        layout: false,
+        board: searchBoard
+      })
+    })
+  )
+})
+
 module.exports = router;

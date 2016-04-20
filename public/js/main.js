@@ -72,6 +72,25 @@
       }
     })
 
+    $('#search-submit').click(function() {
+      var searchValue = $('#search').val();
+      let url = window.location.pathname.split('/')
+      var data = {
+        search: searchValue,
+        apikey: url[2]
+      }
+
+      $.ajax({
+      type: 'POST',
+      data: data,
+      url: 'search',
+      success: function(data){
+        $(".card-option").remove()
+        $("#card-select").append(data)
+      }
+      })
+    })
+
     $(window).focus(function() {
         var isTiming = $('#toggle-timer').hasClass('success');
         if (!timer && !isTiming && blurTime) {

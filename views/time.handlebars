@@ -1,12 +1,14 @@
 <h1>Selected Board: {{ board.board.public.name }}</h1>
 <div class="time">
+  <input type="text" class="search-bar" name="search" id="search">
+  <span id="search-submit" class="button medium">Search</span>
   <form class="" action="/time/" method="post">
     <p>
       <label for="card_apikey">Card</label>
-      <select name="card_apikey">
-          <option value="">--Select a Card--</option>
+      <select name="card_apikey" id="card-select">
+          <option class="card-option" value="">--Select a Card--</option>
         {{#each board.cards}}
-          <option value="{{ this.public.apikey }}">{{ this.public.name }}</option>
+          <option class="card-option" value="{{ this.public.apikey }}">{{ this.public.name }}</option>
         {{/each}}
       </select>
     </p>

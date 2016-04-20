@@ -1,0 +1,4 @@
+<option class="card-option"  value="">--Select a Card--</option>
+{{#each board.cards}}
+<option class="card-option" value="{{ this.public.apikey }}">{{ this.public.name }}</option>
+{{/each}}
