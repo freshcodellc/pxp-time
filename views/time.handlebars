@@ -5,7 +5,7 @@
       <label for="card_apikey">Card</label>
       <select name="card_apikey">
           <option value="">--Select a Card--</option>
-        {{#each board.cards}}
+        {{#each cards}}
           <option value="{{ this.public.apikey }}">{{ this.public.name }}</option>
         {{/each}}
       </select>

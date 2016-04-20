@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var axios = require('axios')
-var api = require('../api')
-var moment = require('moment')
+var axios = require('axios');
+var api = require('../api');
+var moment = require('moment');
+var _ = require('lodash');
 
 router.get('/:apikey', function(req, res) {
   var params = {}
@@ -12,8 +13,9 @@ router.get('/:apikey', function(req, res) {
 
   axios.all([api.getBoard(req.params.apikey), api.getEntries(params)])
     .then(axios.spread(function (r1, r2) {
-      var board = r1.data
-      var entries = r2.data.entries
+      var board = r1.data;
+      var cards = _.filter(r1.data.cards, function(o) { return o.list.public.name !== 'Completed' });
+      var entries = r2.data.entries;
       var hours = 0;
       var minutes = 0;
 
@@ -30,6 +32,7 @@ router.get('/:apikey', function(req, res) {
 
       res.render('time', {
         board: board,
+        cards: cards,
         entries: entries,
         total: total,
         message: req.flash('info'),
