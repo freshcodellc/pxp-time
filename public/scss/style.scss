@@ -148,15 +148,15 @@
 .status {
 
   &--open {
-    background-color: white;
+    background-color: #FFF;
   }
 
   &--billed {
-    background-color: #ffface;
+    background-color: #FFFACE !important;
   }
 
   &--paid {
-    background-color: #d3ffce;
+    background-color: #D3FFCE !important;
   }
 }
 

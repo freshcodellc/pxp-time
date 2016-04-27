@@ -117,13 +117,13 @@
   background-color: #333; }
 
 .status--open {
-  background-color: white; }
+  background-color: #FFF; }
 
 .status--billed {
-  background-color: #ffface; }
+  background-color: #FFFACE !important; }
 
 .status--paid {
-  background-color: #d3ffce; }
+  background-color: #D3FFCE !important; }
 
 /* Foundation General Overrides */
 .client > .button {

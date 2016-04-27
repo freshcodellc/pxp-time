@@ -36,9 +36,9 @@ resources.getUser = function() {
 var entriesUrl = cfg.api_root + '/entries'
 resources.getEntries = function(params) {
   var options = {}
-  var params = {}
 
   if (typeof params == 'undefined' && params !== '') {
+    var params = {}
     params.start = moment().subtract(30, 'days').format('YYYY-MM-DD')
     params.end = moment().add(2, 'days').format('YYYY-MM-DD')
   } else {
@@ -47,6 +47,7 @@ resources.getEntries = function(params) {
   }
 
   options.params = params
+  console.log(params);
 
   return axios.get(entriesUrl, options)
 }
