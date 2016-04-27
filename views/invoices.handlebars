@@ -1,0 +1,50 @@
+<h1>Invoices</h1>
+{{!-- Uncomment once supported by PXP Time API --}}
+{{!-- <div class="row">
+  <form class="" action="/invoices/" method="post">
+    <div class="large-3 columns">
+      <label for="hours">Start Date
+        <input id="start-date" type="input" name="start">
+      </label>
+    </div>
+    <div class="large-3 columns">
+      <label for="hours">End Date
+        <input id="end-date" type="input" name="end">
+      </label>
+    </div>
+    <div class="large-2 columns">
+      <label for="filter">Filter
+        <select id="filter" name="filter">
+          <option value="open" selected>Open</option>
+          <option value="billed">Billed</option>
+          <option value="closed">Closed</option>
+        </select>
+      </label>
+    </div>
+    <input class="button success small" type="submit" name="submit" value="Submit">
+  </form>
+</div> --}}
+<table>
+  <thead>
+    <tr>
+      <th width="100">Invoice #</th>
+      <th width="250">Date</th>
+      <th width="250">Client</th>
+      <th width="250">Project</th>
+      <th width="">Amount</th>
+      <th width="">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each invoices}}
+      <tr class="status--{{ this.public.status }}">
+        <td>{{ this.public.invnum }}</td>
+        <td>{{formatDate this.public.created_at }}</td>
+        <td>{{ this.client.public.name }}</td>
+        <td>{{ this.board.public.name }}</td>
+        <td>${{ this.public.amount }}</td>
+        <td>{{ this.public.status }}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

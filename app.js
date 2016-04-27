@@ -7,8 +7,9 @@ var moment = require('moment')
 var flash = require('connect-flash')
 
 var indexRoutes = require('./routes/index')
-var timeRoutes = require('./routes/time')
 var entriesRoutes = require('./routes/entries')
+var invoicesRoutes = require('./routes/invoices')
+var timeRoutes = require('./routes/time')
 var weeklyRoutes = require('./routes/weekly')
 var cfg = require('./config')
 
@@ -47,8 +48,9 @@ app.use('/static', express.static(__dirname + '/public'));
 
 // Include route files
 app.use('/', indexRoutes)
-app.use('/time', timeRoutes)
 app.use('/entries', entriesRoutes)
+app.use('/invoices', invoicesRoutes)
+app.use('/time', timeRoutes)
 app.use('/weekly', weeklyRoutes)
 
 app.listen(cfg.port, function() {

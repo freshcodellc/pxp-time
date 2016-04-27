@@ -1,8 +1,4 @@
 /* My Stuff */
-input {
-  height: 44px;
-}
-
 .content {
   width: 70%;
   padding: 20px 40px;
@@ -25,12 +21,6 @@ input {
 
 #toggle-timer {
   position: absolute; }
-
-#filter {
-  width: auto;
-  height: 44px;
-  padding: 0 15px;
-}
 
 /* Foundation Sidebar Junk */
 .right-off-canvas-toggle .menu {
@@ -125,6 +115,15 @@ input {
 .bottom-bar-close {
   transform: rotate(45deg);
   background-color: #333; }
+
+.status--open {
+  background-color: white; }
+
+.status--billed {
+  background-color: #ffface; }
+
+.status--paid {
+  background-color: #d3ffce; }
 
 /* Foundation General Overrides */
 .client > .button {

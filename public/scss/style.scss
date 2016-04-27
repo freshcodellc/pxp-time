@@ -145,6 +145,21 @@
 	background-color: #333;
 }
 
+.status {
+
+  &--open {
+    background-color: white;
+  }
+
+  &--billed {
+    background-color: #ffface;
+  }
+
+  &--paid {
+    background-color: #d3ffce;
+  }
+}
+
 /* Foundation General Overrides */
 .client > .button {
   width: 100%;

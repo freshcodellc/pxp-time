@@ -36,9 +36,9 @@ resources.getUser = function() {
 var entriesUrl = cfg.api_root + '/entries'
 resources.getEntries = function(params) {
   var options = {}
+  var params = {}
 
   if (typeof params == 'undefined' && params !== '') {
-    var params = {}
     params.start = moment().subtract(30, 'days').format('YYYY-MM-DD')
     params.end = moment().add(2, 'days').format('YYYY-MM-DD')
   } else {
@@ -62,9 +62,27 @@ resources.getWeekly = function() {
   return axios.get(weeklyUrl, options)
 }
 
-var url = cfg.api_root + '/entries'
+var entryUrl = cfg.api_root + '/entries'
 resources.postEntry = function(post_data) {
-  return axios.post(url, post_data)
+  return axios.post(entryUrl, post_data)
+}
+
+var invoiceUrl = cfg.api_root + '/vendor_invoices'
+resources.getInvoices = function() {
+  var options = {}
+  var params = {}
+
+  if (typeof params == 'undefined' && params !== '') {
+    params.start = moment().subtract(30, 'days').format('YYYY-MM-DD')
+    params.end = moment().add(2, 'days').format('YYYY-MM-DD')
+  } else {
+    params.start = moment(params.start, 'MM/DD/YYYY').format('YYYY-MM-DD')
+    params.end = moment(params.end, 'MM/DD/YYYY').format('YYYY-MM-DD')
+  }
+
+  options.params = params
+
+  return axios.get(invoiceUrl, options)
 }
 
 module.exports = resources
