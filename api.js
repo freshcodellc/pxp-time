@@ -12,7 +12,7 @@ axios.interceptors.request.use(function (config) {
     return config;
   }, function (error) {
     // Do something with request error
-    console.log(error)
+    console.log(error);
     return Promise.reject(error);
   });
 
@@ -47,7 +47,6 @@ resources.getEntries = function(params) {
   }
 
   options.params = params
-  console.log(params);
 
   return axios.get(entriesUrl, options)
 }
