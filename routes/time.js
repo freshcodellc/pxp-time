@@ -14,7 +14,7 @@ router.get('/:apikey', function(req, res) {
   axios.all([api.getBoard(req.params.apikey), api.getEntries(params)])
     .then(axios.spread(function (r1, r2) {
       var board = r1.data;
-      var cards = _.filter(r1.data.cards, function(o) { return o.list.public.name !== 'Completed' });
+      var cards = r1.data.cards;
       var entries = r2.data.entries;
       var hours = 0;
       var minutes = 0;
